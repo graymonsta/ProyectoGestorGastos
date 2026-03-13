@@ -3,10 +3,77 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProyectoGestorGastos"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:local="clr-namespace:ProyectoGestorGastos" 
+        xmlns:views="clr-namespace:ProyectoGestorGastos.Views"
+        xmlns:vm="clr-namespace:ProyectoGestorGastos.ViewModels"
+        xmlns:controls="clr-namespace:ProyectoGestorGastos.Controls"
+      
+        Title="Gestor de Gastos" Height="620" Width="1020"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F4F4">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:DashboardView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:GastosViewModel}">
+            <views:GastosView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ReportesViewModel}">
+            <views:ReportesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PerfilViewModel}">
+            <views:PerfilView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Border Grid.Column="0"
+            Background="#1E1E2E"
+            Padding="8,16,8,16">
+            <DockPanel>
+
+                <StackPanel DockPanel.Dock="Top" Margin="12,0,12,24">
+                    <TextBlock Text="GestorGastos"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,2"/>
+                    <TextBlock Text="Panel personal"
+                           FontSize="11"
+                           Foreground="#888"/>
+                </StackPanel>
+
+                <ItemsControl ItemsSource="{Binding MenuOptions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.NavigateCommand,
+                                         RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0">
+                                <controls:MenuItemControl/>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </DockPanel>
+        </Border>
+
+
+        <Border Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding CurrentViewModel}" Margin="0"/>
+        </Border>
 
     </Grid>
 </Window>

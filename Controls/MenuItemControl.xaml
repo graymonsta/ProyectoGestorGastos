@@ -4,9 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProyectoGestorGastos.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d">
+    <Border Margin="4,2" Padding="12,10" CornerRadius="8" Background="Transparent">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="26"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock Grid.Column="0"
+                    Text="{Binding Icono}"
+                    FontSize="14"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Foreground="#AAA"/>
+
+
+        <TextBlock Grid.Column="1"
+                    Text="{Binding Titulo}"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Foreground="#E0E0E0"/>
     </Grid>
+    </Border>
 </UserControl>
